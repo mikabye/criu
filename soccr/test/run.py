@@ -27,17 +27,17 @@ p2 = Popen(args + ["src"], stdout=PIPE, stdin=PIPE)
 
 p1.stdout.read(5)
 p2.stdout.read(5)
-p1.stdin.write("start")
-p2.stdin.write("start")
+p1.stdin.write(b"start")
+p2.stdin.write(b"start")
 
-p1.stdin.write(str1)
+p1.stdin.write(str1.encode())
 p1.stdin.close()
-p2.stdin.write(str2)
+p2.stdin.write(str2.encode())
 p2.stdin.close()
 
 s = p1.stdout.read()
 m = hashlib.md5()
-m.update(str2)
+m.update(str2.encode())
 str2 = m.hexdigest()
 
 if str2 != eval(s):
@@ -46,7 +46,7 @@ if str2 != eval(s):
 
 s = p1.stdout.read()
 m = hashlib.md5()
-m.update(str1)
+m.update(str1.encode())
 str1 = m.hexdigest()
 
 s = p2.stdout.read()

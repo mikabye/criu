@@ -6,7 +6,7 @@ import hashlib
 sk = socket.fromfd(3, socket.AF_INET, socket.SOCK_STREAM)
 
 s = sys.stdin.read()
-ret = sk.send(s)
+ret = sk.send(s.encode())
 print("%s: send() -> %d" % (sys.argv[1], ret), file=sys.stderr)
 sk.shutdown(socket.SHUT_WR)
 m = hashlib.md5()

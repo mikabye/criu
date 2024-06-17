@@ -8,12 +8,12 @@
 
 #define pr_perror(fmt, ...) printf(fmt ": %m\n", ##__VA_ARGS__)
 
-enum {
-	TCP_NO_QUEUE,
-	TCP_RECV_QUEUE,
-	TCP_SEND_QUEUE,
-	TCP_QUEUES_NR,
-};
+// enum {
+// 	TCP_NO_QUEUE,
+// 	TCP_RECV_QUEUE,
+// 	TCP_SEND_QUEUE,
+// 	TCP_QUEUES_NR,
+// };
 static void pr_printf(unsigned int level, const char *fmt, ...)
 {
 	va_list args;
@@ -133,10 +133,10 @@ int main(void)
 	libsoccr_set_addr(so_rst, 1, &addr, 0);
 	libsoccr_set_addr(so_rst, 0, &dst, 0);
 
-	queue = libsoccr_get_queue_bytes(so, TCP_RECV_QUEUE, SOCCR_MEM_EXCL);
-	libsoccr_set_queue_bytes(so_rst, TCP_RECV_QUEUE, queue, SOCCR_MEM_EXCL);
-	queue = libsoccr_get_queue_bytes(so, TCP_SEND_QUEUE, SOCCR_MEM_EXCL);
-	libsoccr_set_queue_bytes(so_rst, TCP_SEND_QUEUE, queue, SOCCR_MEM_EXCL);
+	// queue = libsoccr_get_queue_bytes(so, TCP_RECV_QUEUE, SOCCR_MEM_EXCL);
+	// libsoccr_set_queue_bytes(so_rst, TCP_RECV_QUEUE, queue, SOCCR_MEM_EXCL);
+	// queue = libsoccr_get_queue_bytes(so, TCP_SEND_QUEUE, SOCCR_MEM_EXCL);
+	// libsoccr_set_queue_bytes(so_rst, TCP_SEND_QUEUE, queue, SOCCR_MEM_EXCL);
 
 	ret = libsoccr_restore(so_rst, &data, dsize);
 	if (ret) {

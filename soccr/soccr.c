@@ -89,6 +89,9 @@ static int tcp_repair_on(int fd)
 {
 	int ret, aux = 1;
 
+	//testing
+	printf("Hello, TCP repair on.\n");
+
 	ret = setsockopt(fd, SOL_TCP, TCP_REPAIR, &aux, sizeof(aux));
 	if (ret < 0)
 		logerr("Can't turn TCP repair mode ON");
@@ -745,6 +748,17 @@ int libsoccr_restore(struct libsoccr_sk *sk, struct libsoccr_sk_data *data, unsi
 			wopt.rcv_wup--;
 			wopt.rcv_wnd++;
 		}
+
+		//Debug
+		printf("tcp_repair_window values:\n");
+		printf("snd_wl1: %u\n", wopt.snd_wl1);
+		printf("snd_wnd: %u\n", wopt.snd_wnd);
+		printf("max_window: %u\n", wopt.max_window);
+		printf("rcv_wnd: %u\n", wopt.rcv_wnd);
+		printf("rcv_wup: %u\n", wopt.rcv_wup);
+
+		printf("sk->fd: %u\n", sk->fd);
+		//End debug
 
 		if (setsockopt(sk->fd, SOL_TCP, TCP_REPAIR_WINDOW, &wopt, sizeof(wopt))) {
 			logerr("Unable to set window parameters");
